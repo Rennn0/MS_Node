@@ -141,7 +141,6 @@ const baz: Foo = {
 }
 
 const bar: Bar = new Bar();
-
 console.log(typeof baz == "object");
 console.log(bar instanceof Bar);
 console.log("name" in baz)
