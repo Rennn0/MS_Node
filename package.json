@@ -1,9 +1,10 @@
 {
 	"scripts": {
-		"start": "nodemon --exec ts-node src/main.ts",
+		"start": "nodemon --exec ts-node -r tsconfig-paths/register src/main.ts",
 		"build": "tsc"
 	},
 	"devDependencies": {
-		"@types/node": "^20.12.11"
+		"@types/node": "^20.12.11",
+		"tsconfig-paths": "^4.2.0"
 	}
 }
