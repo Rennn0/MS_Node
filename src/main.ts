@@ -1,9 +1,12 @@
 // import { readFile } from "fs";
 // console.log("Start");
 
-import { builder } from "@lib/builder/generics";
-import { generics } from "@lib/factory_pattern/generics";
-import { products } from "@lib/factory_pattern/products";
+// import { instances } from "@lib/bridge/instances";
+// import { objects } from "@lib/bridge/objects";
+
+// import { builder } from "@lib/builder/generics";
+// import { generics } from "@lib/factory_pattern/generics";
+// import { products } from "@lib/factory_pattern/products";
 
 // import { generics } from "@lib/factory_pattern/generics";
 // import { factories } from "@lib/factory_pattern/factories";
@@ -19,7 +22,6 @@ import { products } from "@lib/factory_pattern/products";
 // fac3.Invoke({ saxeli: "Luka" });
 // fac4.Invoke("BETTER SHAPE");
 
-
 // const read = (file: string) => {
 //     readFile(file, "utf-8", (err, data) => {
 //         if (err)
@@ -27,7 +29,7 @@ import { products } from "@lib/factory_pattern/products";
 //         else
 //             console.log(`Content of ${file} - ${data}`);
 //     })
-// }    
+// }
 
 // const files = ["test.txt", "test2.txt"]
 // files.forEach(f => read(f));
@@ -84,7 +86,6 @@ import { products } from "@lib/factory_pattern/products";
 //     .then(() => console.log('promise 1'))
 //     .then(() => console.log('promise 2'))
 
-
 /**
  * script start
  * promise 1
@@ -98,7 +99,6 @@ import { products } from "@lib/factory_pattern/products";
  * promise 5
  * promise 6
  */
-
 
 // const seconds = Date.now();
 
@@ -124,11 +124,10 @@ import { products } from "@lib/factory_pattern/products";
 //     console.log("this is the end");
 // })();
 
-
 // this is start
 // this is just a message
 // this is the end
-// cb1 
+// cb1
 // cb2
 
 // interface Foo {
@@ -172,7 +171,6 @@ import { products } from "@lib/factory_pattern/products";
 //     abstract Bar(): void;
 // }
 
-
 // class Bar extends Base {
 //     constructor() {
 //         super();
@@ -201,7 +199,6 @@ import { products } from "@lib/factory_pattern/products";
 //         console.log("BAZ CALLED BAR");
 //     }
 // }
-
 
 // interface Shape {
 //     draw(): void;
@@ -290,7 +287,6 @@ import { products } from "@lib/factory_pattern/products";
 //     }
 // }
 
-
 // const cLogger = new LoggerFct().createLogger(Logger_Type.Console);
 // const fLogger = new LoggerFct().createLogger(Logger_Type.File, { filePath: "testLog.out" });
 // cLogger.log("Hello from cLogger");
@@ -337,7 +333,6 @@ import { products } from "@lib/factory_pattern/products";
 //     }
 // }
 
-
 // class HondaFactory implements IFactory {
 //     GetRightPart(): IPart {
 //         return new HondaRight();
@@ -382,7 +377,6 @@ import { products } from "@lib/factory_pattern/products";
 // console.log(rightDoor.MakePart());
 // console.log(leftDoor.MakePart());
 
-
 // type AuthParams = {
 //     name: string;
 //     key: string;
@@ -424,7 +418,6 @@ import { products } from "@lib/factory_pattern/products";
 //     }
 // }
 
-
 // function Authorizer(arg: AuthParams): (target: typeof Greeter) => void | typeof Greeter {
 //     return (target: typeof Greeter) => {
 //         if (arg.key != "Luka")
@@ -433,70 +426,367 @@ import { products } from "@lib/factory_pattern/products";
 //     }
 // }
 
-
 // const greeter = new Greeter();
 
-type Builder<T> = {
-    [K in keyof T]: (arg: T[K]) => Builder<T>
-} & { build: () => T }
+// type Builder<T> = {
+//     [K in keyof T]: (arg: T[K]) => Builder<T>
+// } & { build: () => T }
 
-function builder<T>(template: T = {} as T): Builder<T> {
-    const proxy = new Proxy({}, {
-        get(_, prop) {
-            if (prop == "build") {
-                return () => Object.assign({}, template);
-            }
-            return (value?: any) => {
-                if (value) {
-                    template[prop] = value;
-                }
-                return proxy;
-            }
-        }
-    })
+// function builder<T>(template: T = {} as T): Builder<T> {
+//     const proxy = new Proxy({}, {
+//         get(_, prop) {
+//             if (prop == "build") {
+//                 return () => Object.assign({}, template);
+//             }
+//             return (value?: any) => {
+//                 if (value) {
+//                     template[prop] = value;
+//                 }
+//                 return proxy;
+//             }
+//         }
+//     })
 
-    return proxy as Builder<T>;
-}
+//     return proxy as Builder<T>;
+// }
 
-interface Person {
-    name: string;
-    email: string;
-    age: number;
-}
+// interface Person {
+//     name: string;
+//     email: string;
+//     age: number;
+// }
 
-const pb1 = builder<Person>();
-const person1 = pb1
-    .age(12)
-    .email("moskito")
-    .name("PERSON1")
-    .build(); // garantia araq yvela propze, arc custom validacia
+// const pb1 = builder<Person>();
+// const person1 = pb1
+//     .age(12)
+//     .email("moskito")
+//     .name("PERSON1")
+//     .build(); // garantia araq yvela propze, arc custom validacia
 
-class pb2 implements builder.Hefestos<Person, pb2> {
-    setName = (arg: string) => {
-        this.entity.name = arg;
-        return this;
-    }
-    setEmail = (arg: string) => {
-        this.entity.email = arg;
-        return this;
-    };
-    setAge = (arg: number) => {
-        this.entity.age = arg;
-        return this;
-    };
-    build = () => this.entity;
+// class pb2 implements builder.Hefestos<Person, pb2> {
+//     setName = (arg: string) => {
+//         this.entity.name = arg;
+//         return this;
+//     }
+//     setEmail = (arg: string) => {
+//         this.entity.email = arg;
+//         return this;
+//     };
+//     setAge = (arg: number) => {
+//         this.entity.age = arg;
+//         return this;
+//     };
+//     build = () => this.entity;
 
-    entity: Person = {
-        name: "",
-        email: "",
-        age: 0
-    };
-}
-const person2 = new pb2()
-    // .setAge(3)
-    .setEmail("axaxa")
-    .setName("PREDATOR")
-    .build();
+//     entity: Person = {
+//         name: "",
+//         email: "",
+//         age: 0
+//     };
+// }
+// const person2 = new pb2()
+//     // .setAge(3)
+//     .setEmail("axaxa")
+//     .setName("PREDATOR")
+//     .build();
 
-console.log(person1);
-console.log(person2);
+// console.log(person1);
+// console.log(person2);
+
+// class Home {
+//     address: string;
+//     price: number;
+// }
+
+// class HomeBuilder {
+//     private home: Home;
+
+//     constructor() {
+//         this.home = new Home();
+//     }
+
+//     public static create(): HomeBuilder {
+//         return new HomeBuilder();
+//     }
+
+//     public setAdress(address: string): HomeBuilder {
+//         this.home.address = address;
+//         return this;
+//     }
+
+//     public setPrice(price: number): HomeBuilder {
+//         this.home.price = price;
+//         return this;
+//     }
+
+//     public build(): Home {
+//         return this.home;
+//     }
+// }
+
+// const hb: HomeBuilder = HomeBuilder.create();
+// const house: Home = hb.setAdress("Poti").setPrice(21000).build();
+// console.log(house);
+
+// const eagle = new instances.Eagle(new objects.Wings());
+// const lion = new instances.Lion(new objects.FourLegs());
+
+// eagle.doMove();
+// lion.doMove();
+
+// interface IBridge {
+//     connect(): void;
+// }
+
+// interface IComponent {
+//     bridge(): void;
+// }
+
+// class AWS implements IBridge {
+//     connect(): void {
+//         console.log("AWS bridge");
+//     }
+// }
+
+// class Azure implements IBridge {
+//     connect(): void {
+//         console.log("Azure bridge");
+//     }
+// }
+
+// class Google implements IBridge {
+//     connect(): void {
+//         console.log("Google bridge");
+//     }
+// }
+
+// /**
+// * Represents a database component that can be connected to different cloud platforms.
+// *
+// * @implements {IComponent}
+// */
+// class Database implements IComponent {
+//     /**
+//      * The bridge used to connect to the cloud platform.
+//      *
+//      * @private
+//      * @type {IBridge}
+//      */
+//     private _bridge: IBridge;
+
+//     /**
+//      * Creates an instance of Database.
+//      *
+//      * @param {IBridge} bridge - The bridge used to connect to the cloud platform.
+//      */
+//     constructor(bridge: IBridge) {
+//         this._bridge = bridge;
+//     }
+
+//     /**
+//      * Connects to the cloud platform using the bridge.
+//      */
+//     bridge(): void {
+//         this._bridge.connect();
+//     }
+// }
+
+// const usersDb = new Database(new Azure());
+// const paymentDb = new Database(new AWS());
+// const videos = new Database(new Google());
+
+// usersDb.bridge();
+// paymentDb.bridge();
+// videos.bridge();
+
+// const enum Algorithms {
+// 	SHA256,
+// 	MD5,
+// 	RSA,
+// }
+
+// type HashedValue = {
+// 	salt: string;
+// 	hash: string;
+// };
+
+// interface IAlgorithm {
+// 	createHash(): HashedValue;
+// }
+
+// class SHA256 implements IAlgorithm {
+// 	createHash(): HashedValue {
+// 		return {
+// 			salt: "SALT",
+// 			hash: "HASH from sha256",
+// 		};
+// 	}
+// }
+
+// class MD5 implements IAlgorithm {
+// 	createHash(): HashedValue {
+// 		return {
+// 			salt: "SALT",
+// 			hash: "HASH from md5",
+// 		};
+// 	}
+// }
+
+// class RSA implements IAlgorithm {
+// 	createHash(): HashedValue {
+// 		return {
+// 			salt: "SALT",
+// 			hash: "HASH from rsa",
+// 		};
+// 	}
+// }
+
+// class Hasher {
+// 	public static createHash(algo: Algorithms): HashedValue {
+// 		switch (algo) {
+// 			case Algorithms.SHA256:
+// 				return new SHA256().createHash();
+// 			case Algorithms.MD5:
+// 				return new MD5().createHash();
+// 			case Algorithms.RSA:
+// 				return new RSA().createHash();
+// 		}
+// 	}
+// }
+
+// const hashPassword = Hasher.createHash(Algorithms.SHA256);
+// console.log(hashPassword);
+
+// interface ISubscriber {
+// 	update(arg: any): void;
+// }
+
+// interface IPublisher {
+// 	publish(arg: any): void;
+// 	subscribe(subscribers: ISubscriber[]): void;
+// 	unsubscribe(subscriber: ISubscriber): boolean;
+// }
+
+// class News implements IPublisher {
+// 	private _subscribers: Map<ISubscriber, Function> = new Map();
+
+// 	constructor() {}
+
+// 	publish(arg: any): void {
+// 		this._subscribers.forEach((fn) => fn(arg));
+// 	}
+// 	subscribe(subscribers: ISubscriber[]): void {
+// 		subscribers.forEach((subscriber) => this._subscribers.set(subscriber, subscriber.update));
+// 	}
+// 	unsubscribe(subscriber: ISubscriber): boolean {
+// 		if (this._subscribers.has(subscriber)) {
+// 			this._subscribers.delete(subscriber);
+// 			return true;
+// 		}
+// 		return false;
+// 	}
+// }
+
+// class DayliMail implements ISubscriber {
+// 	update(arg: any): void {
+// 		console.log(`Dayli mail received news ${arg}`);
+// 	}
+// }
+
+// class BBC implements ISubscriber {
+// 	update(arg: any): void {
+// 		console.log(`BBC  received news ${arg}`);
+// 	}
+// }
+
+// class Palitra implements ISubscriber {
+// 	update(arg: any): void {
+// 		console.log(`Palitra received news ${arg}`);
+// 	}
+// }
+
+// const news = new News();
+
+// import { createInterface } from "readline";
+
+// const rl = createInterface({
+// 	input: process.stdin,
+// 	output: process.stdout,
+
+// });
+
+// const promptUser = () => {
+// 	rl.question("[bbc,dm,p] | pub <arg>\n", (answer) => {
+// 		console.log(answer);
+// 		switch (answer) {
+// 			case "bbc":
+// 				news.subscribe([new BBC()]);
+// 				break;
+// 			case "dm":
+// 				news.subscribe([new DayliMail()]);
+// 				break;
+// 			case "p":
+// 				news.subscribe([new Palitra()]);
+// 				break;
+// 			default:
+// 				news.publish(answer.slice(answer.indexOf("pub") + 3));
+// 		}
+
+// 		promptUser();
+// 	});
+// };
+
+// promptUser();
+
+// interface IMember {
+// 	mediator: IMediator;
+// 	name: string;
+// 	send(msg: string): void;
+// 	receive(msg: string): void;
+// }
+
+// interface IMediator {
+// 	sendMessage(msg: string, sender: IMember): void;
+// 	addMember(member: IMember): void;
+// }
+
+// class Chat implements IMediator {
+// 	private _members: IMember[] = [];
+// 	sendMessage(msg: string, sender: IMember): void {
+// 		this._members.forEach((member) => {
+// 			if (member !== sender) {
+// 				member.receive(msg);
+// 			}
+// 		});
+// 	}
+// 	addMember(member: IMember): void {
+// 		this._members.push(member);
+// 	}
+// }
+
+// class User implements IMember {
+// 	mediator: IMediator;
+// 	name: string;
+// 	constructor(mediator: IMediator, name: string) {
+// 		this.mediator = mediator;
+// 		this.name = name;
+// 	}
+// 	send(msg: string): void {
+// 		console.log(`${this.name} sending message`);
+// 		this.mediator.sendMessage(msg, this);
+// 	}
+// 	receive(msg: string): void {
+// 		console.log(`${this.name} received message ${msg}`);
+// 	}
+// }
+
+// const chat = new Chat();
+// const user1 = new User(chat, "User1");
+// const user2 = new User(chat, "User2");
+// const user3 = new User(chat, "User3");
+
+// chat.addMember(user1);
+// chat.addMember(user2);
+// chat.addMember(user3);
+
+// user1.send("Hello niggas");
