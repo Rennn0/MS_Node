@@ -62,5 +62,5 @@ export function main() {
 		} catch (e) {
 			console.error(e);
 		}
-	}, 9000);
+	}, 11000);
 }
