@@ -1,5 +1,11 @@
+import { observer } from "@lib/assembly";
+
 export const enum Stations {
-	Airbus,
-	Boeing,
-	GeorgianAirways,
+	Airbus = "Airbus",
+	Boeing = "Boeing",
+	GeorgianAirways = "GeorgianAirways",
 }
+
+export type MappedStations = {
+	[K in Stations]: observer.Observable;
+};

@@ -1,9 +1,6 @@
 import { observer } from "@lib/design_patterns/behavioural/observer/core";
 export class A320 extends observer.Observer {
-	constructor(observable: observer.Observable) {
-		super(observable);
-	}
 	notify(arg: any): void {
-		console.log(`[A320] ${arg}`);
+		console.log(`[A320 notification ] ${arg}`);
 	}
 }

@@ -29,7 +29,6 @@ namespace observer {
 	 */
 	export class Observable implements IObservable {
 		private _audience: Map<number, Function>;
-		private _nextId: number = 0;
 
 		/**
 		 * Creates an instance of Observable.
@@ -45,11 +44,9 @@ namespace observer {
 		 * @returns The unique ID assigned to the observer.
 		 */
 		subscribe(observer: Observer): number {
-			if (observer.getId() != 0) throw new Error("cant subscribe twice");
-
-			this._nextId++;
-			this._audience.set(this._nextId, observer.notify);
-			return this._nextId;
+			if (this._audience.has(observer.getId())) throw new Error("Can subscribe twice");
+			this._audience.set(observer.getId(), observer.notify);
+			return observer.getId();
 		}
 
 		/**
@@ -78,19 +75,9 @@ namespace observer {
 	}
 
 	export abstract class Observer {
-		private _observable: IObservable;
-		private _myId: number = 0;
-		public constructor(observable: IObservable) {
-			this._observable = observable;
-			this._myId = this._observable.subscribe(this);
-		}
-		public getId = () => this._myId;
-		public unsubscribe = () => this._observable.unsubscribe(this._myId);
-		/**
-		 * Notifies the observer of an event.
-		 * @param arg - The argument to pass to the observer.
-		 */
+		private _id: number = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 		abstract notify(arg: any): void;
+		public getId = () => this._id;
 	}
 }
 

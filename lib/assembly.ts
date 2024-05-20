@@ -6,8 +6,8 @@ export { CorporateJet } from "@lib/air_traffic_controll/plane_observers/Corporat
 export { AirbusStation } from "@lib/air_traffic_controll/station_observables/Airbus";
 export { BoeingStation } from "@lib/air_traffic_controll/station_observables/Boeing";
 export { GeorgianAirways } from "@lib/air_traffic_controll/station_observables/GeorgianAirways";
-export { Planes } from "@lib/air_traffic_controll/enums/Planes";
-export { Stations } from "@lib/air_traffic_controll/enums/Stations";
+export { Planes, MappedPlanes } from "@lib/air_traffic_controll/enums/Planes";
+export { Stations, MappedStations } from "@lib/air_traffic_controll/enums/Stations";
 export { planeStrategy, stationStrategy } from "@lib/air_traffic_controll/access";
 
 export { observer } from "@lib/design_patterns/behavioural/observer/core";
