@@ -1,3 +1,4 @@
-import { main } from "./air_traffic_controll";
+import { ATCSolution } from "./air_traffic_controll";
 
-main();
+const airTrafficControll=new ATCSolution();
+airTrafficControll.main();

@@ -27,3 +27,7 @@ export function stationMessage(msg: string, station: observer.Observable) {
 	station.publish(msg + ` ${new Date().toLocaleTimeString()}`);
 	console.log("=======================");
 }
+
+export abstract class Solution {
+	abstract main():void;
+}

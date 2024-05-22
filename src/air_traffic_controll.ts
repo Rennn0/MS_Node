@@ -1,6 +1,7 @@
-import { stationMessage, stations, planes } from "./setup";
+import { stationMessage, stations, planes, Solution } from "./setup";
 
-export function main() {
+export class ATCSolution extends Solution{
+override main(): void {
 	let airbus1 = stations.Airbus.subscribe(planes.A320);
 	let airbus2 = stations.Airbus.subscribe(planes.A350);
 	let airbus3 = stations.Airbus.subscribe(planes.Boeing737);
@@ -63,4 +64,6 @@ export function main() {
 			console.error(e);
 		}
 	}, 11000);
+	}
 }
+
