@@ -11,7 +11,7 @@ class Player extends mediatR.Member {
 		this._name = name;
 	}
 	public handle(command: any): void {
-		console.log(`Player ${this._name} received command ${command}`);
+		console.log(`${this._id} ${this._name} received command ${command} `);
 	}
 }
 
@@ -22,7 +22,7 @@ class Admin extends mediatR.Member {
 		this._name = name;
 	}
 	public handle(command: any): void {
-		console.log(`Admin ${this._name} received command ${command}`);
+		console.log(`${this._id} ${this._name} received command ${command}`);
 	}
 }
 

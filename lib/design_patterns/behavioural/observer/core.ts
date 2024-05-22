@@ -75,7 +75,10 @@ namespace observer {
 	}
 
 	export abstract class Observer {
-		private _id: number = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+		private _id: number;
+		constructor() {
+			this._id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+		}
 		abstract notify(arg: any): void;
 		public getId = () => this._id;
 	}
